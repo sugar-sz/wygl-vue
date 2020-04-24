@@ -57,12 +57,13 @@ export default {
                         .post(url)
                         .then(rs => {
                             let userInfo = rs.data.data
-                            //console.log(userInfo.token)
+                            console.log(userInfo.wyglAdmin.id)
                             if (rs.data.code == 200) {
                                 this.$message.success('登录成功');
                                 localStorage.setItem('token',userInfo.token)
+                                localStorage.setItem('adminId',userInfo.wyglAdmin.id)
                                 localStorage.setItem('user',JSON.stringify(userInfo))
-                                this.$router.push('/');
+                                this.$router.push({path:'/'});
                             }else{
                                 this.$message.error('用户名或密码错误');
                             }

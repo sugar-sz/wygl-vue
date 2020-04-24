@@ -7,7 +7,7 @@
                     <img src="../../assets/img/img.jpg" class="user-avator" alt />
                     <div class="user-info-cont">
                         <div class="user-info-name">{{userInfo.wyglAdmin.username}}</div>
-                        <div style="margin-top:30px">{{role}}</div>
+                        <div style="margin-top:30px">{{userInfo.authorities[0].authority=='ROLE_admin'?'系统管理员':'普通用户'}}</div>
                     </div>
                 </div>
                 <div class="user-info-list">
@@ -103,6 +103,7 @@ export default {
     },
     created() {
         this.userInfo = JSON.parse(localStorage.getItem('user'))
+        console.log(this.userInfo.wyglAdmin.id)
         this.getParkSpace()
         this.getOwnerCount()
         this.getRoomCount()
@@ -110,11 +111,6 @@ export default {
     },
     components: {
         Schart
-    },
-    computed: {
-        role() {
-            return this.userInfo.authorities[0].authority === 'ROLE_admin' ? '系统管理员' : '普通用户';
-        }
     },
     methods: {
         handlePageChange(val) {
